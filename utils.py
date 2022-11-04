@@ -1,9 +1,12 @@
 import time
-import datetime
 import os
 import glob
 
 def find_log_file(server_log_path):
+    """ Returns the most recent server log file.
+    
+        Currently not functional if server is already running.
+    """
     while True:
         ftype = r'\*log'
         files = glob.glob(server_log_path+ftype)
@@ -13,6 +16,8 @@ def find_log_file(server_log_path):
             pass
                   
 def follow(newest_file):
+    """ Yields new lines in log file.
+    """
     newest_file.seek(0, os.SEEK_END)
     while True:
         line = newest_file.readline()
